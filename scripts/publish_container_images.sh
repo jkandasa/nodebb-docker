@@ -17,8 +17,8 @@ cp install/package.json package.json
 # container registry
 REGISTRY='quay.io/jkandasa'
 ALT_REGISTRY='docker.io/jkandasa'
-#PLATFORMS="linux/arm/v7,linux/arm64/v8,linux/amd64,linux/386,linux/ppc64le,linux/s390x"
-PLATFORMS="linux/amd64"
+#PLATFORMS="linux/arm/v7,linux/arm64,linux/amd64,linux/386,linux/ppc64le,linux/s390x"
+PLATFORMS="linux/arm64,linux/amd64"
 IMAGE_TAG=${GIT_TAG}
 
 # build and push to quay.io
