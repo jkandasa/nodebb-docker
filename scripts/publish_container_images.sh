@@ -2,11 +2,17 @@
 
 GIT_TAG=$(echo $GITHUB_REF | sed 's/refs\/tags\///g')
 
+# backup Docker file
+mkdir docker-repo
+cp Dockerfile docker-repo/Dockerfile
+
 # download NodeBB source code
-#wget https://github.com/NodeBB/NodeBB/archive/refs/tags/${GIT_TAG}.zip -O NodeBB.zip
-#unzip NodeBB.zip
-#rm NodeBB.zip
-#mv NodeBB* NodeBB
+wget https://github.com/NodeBB/NodeBB/archive/refs/tags/${GIT_TAG}.zip -O NodeBB.zip
+unzip NodeBB.zip
+rm NodeBB.zip
+mv NodeBB* .
+ls -alh
+cp install/package.json package.json
 
 # container registry
 REGISTRY='quay.io/jkandasa'
