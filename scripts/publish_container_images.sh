@@ -10,7 +10,7 @@ cp Dockerfile docker-repo/Dockerfile
 wget https://github.com/NodeBB/NodeBB/archive/refs/tags/${GIT_TAG}.zip -O NodeBB.zip
 unzip NodeBB.zip
 rm NodeBB.zip
-mv NodeBB* .
+mv NodeBB*/* .
 ls -alh
 cp install/package.json package.json
 
