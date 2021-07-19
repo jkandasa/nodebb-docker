@@ -1,0 +1,30 @@
+name: publish container images
+on:
+  push:
+    tags: ["v*"]
+
+jobs:
+  setup:
+    name: Setup
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: docker/setup-buildx-action@v1
+      - uses: actions/setup-node@v2
+        with:
+          node-version: "14"
+
+      - name: Login in to docker registry
+        uses: docker/login-action@v1
+        with:
+          username: ${{ secrets.DOCKER_USERNAME }}
+          password: ${{ secrets.DOCKER_TOKEN }}
+      - name: Login in to quay.io registry
+        uses: docker/login-action@v1
+        with:
+          registry: quay.io
+          username: ${{ secrets.QUAY_USERNAME }}
+          password: ${{ secrets.QUAY_TOKEN }}
+
+      - name: Build container image and publish
+        run: ./publish_container_images.sh
