@@ -2,8 +2,11 @@
 
 GIT_TAG=$(echo $GITHUB_REF | sed 's/refs\/tags\///g')
 
-# download install/package.json
-wget https://raw.githubusercontent.com/NodeBB/NodeBB/${GIT_TAG}/install/package.json
+# download NodeBB source code
+wget https://github.com/NodeBB/NodeBB/archive/refs/tags/${GIT_TAG}.zip -O NodeBB.zip
+unzip NodeBB.zip
+rm NodeBB.zip
+mv NodeBB* NodeBB
 
 # container registry
 REGISTRY='quay.io/jkandasa'
