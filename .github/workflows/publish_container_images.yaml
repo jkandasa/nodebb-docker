@@ -9,8 +9,16 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - name: checkout repository
+      - name: checkout docker repository
         uses: actions/checkout@v2
+        with:
+          path: docker-repo
+
+      - name: checkout NodeBB repository
+        uses: actions/checkout@v2
+        with:
+          repository: NodeBB/NodeBB
+          ref: ${GITHUB_REF}
       
       - uses: docker/setup-buildx-action@v1
 
@@ -27,4 +35,8 @@ jobs:
           password: ${{ secrets.QUAY_TOKEN }}
 
       - name: Build container image and publish
-        run: ./scripts/publish_container_images.sh
+        run: |
+          cp docker-repo/Dockerfile .
+          cp docker-repo/scripts/publish_container_images.sh ./publish_container_images.sh
+          chmod +x ./publish_container_images.sh
+          ./publish_container_images.sh
