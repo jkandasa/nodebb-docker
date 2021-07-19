@@ -6,7 +6,7 @@ WORKDIR /usr/src/app
 ARG NODE_ENV
 ENV NODE_ENV $NODE_ENV
 
-COPY ./NodeBB/ /usr/src/app/
+COPY ./NodeBB/* /usr/src/app/
 
 RUN apk --no-cache add tzdata npm git && \
     npm install --only=prod && \
