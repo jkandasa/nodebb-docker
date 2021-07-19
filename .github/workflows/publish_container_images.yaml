@@ -37,6 +37,7 @@ jobs:
       - name: Build container image and publish
         run: |
           ls -alh
+          cp install/package.json package.json
           cp docker-repo/Dockerfile .
           cp docker-repo/scripts/publish_container_images.sh ./publish_container_images.sh
           chmod +x ./publish_container_images.sh
