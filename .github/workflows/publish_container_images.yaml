@@ -27,4 +27,4 @@ jobs:
           password: ${{ secrets.QUAY_TOKEN }}
 
       - name: Build container image and publish
-        run: ./publish_container_images.sh
+        run: ./scripts/publish_container_images.sh
