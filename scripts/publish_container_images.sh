@@ -3,7 +3,7 @@
 GIT_TAG=$(echo $GITHUB_REF | sed 's/refs\/tags\///g')
 
 # download install/package.json
-wget https://github.com/NodeBB/NodeBB/blob/${GIT_TAG}/install/package.json
+wget https://raw.githubusercontent.com/NodeBB/NodeBB/${GIT_TAG}/install/package.json
 
 # container registry
 REGISTRY='quay.io/jkandasa'
