@@ -25,12 +25,12 @@ IMAGE_TAG=${GIT_TAG}
 docker buildx build --push \
   --progress=plain \
   --platform ${PLATFORMS} \
-  --file Dockerfile \
+  --file Dockerfile.buildx \
   --tag ${REGISTRY}/nodebb-alpine:${IMAGE_TAG} .
 
 # build and push to docker.io
 docker buildx build --push \
   --progress=plain \
   --platform ${PLATFORMS} \
-  --file Dockerfile \
+  --file Dockerfile.buildx \
   --tag ${ALT_REGISTRY}/nodebb-alpine:${IMAGE_TAG} .
