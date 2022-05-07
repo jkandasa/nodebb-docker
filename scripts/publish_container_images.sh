@@ -26,11 +26,11 @@ docker buildx build --push \
   --progress=plain \
   --platform ${PLATFORMS} \
   --file Dockerfile.buildx \
-  --tag ${REGISTRY}/nodebb-alpine:${IMAGE_TAG} .
+  --tag ${REGISTRY}/nodebb-slim:${IMAGE_TAG} .
 
 # build and push to docker.io
 docker buildx build --push \
   --progress=plain \
   --platform ${PLATFORMS} \
   --file Dockerfile.buildx \
-  --tag ${ALT_REGISTRY}/nodebb-alpine:${IMAGE_TAG} .
+  --tag ${ALT_REGISTRY}/nodebb-slim:${IMAGE_TAG} .
