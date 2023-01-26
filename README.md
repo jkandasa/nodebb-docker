@@ -2,5 +2,5 @@
 nodebb docker image
 
 ### Container image
-  * [Docker Hub](https://hub.docker.com/repository/docker/jkandasa/nodebb)
+  * [Docker Hub](https://hub.docker.com/r/jkandasa/nodebb)
   * [Quay.io](https://quay.io/repository/jkandasa/nodebb)
