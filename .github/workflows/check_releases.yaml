@@ -1,0 +1,36 @@
+name: Check releases on nodebb repository
+
+on:
+  schedule:
+    - cron: "0 * * * *" # Runs every 1 hour
+  workflow_dispatch: {}
+
+jobs:
+  check_release:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Install Dependencies
+        run: sudo apt-get install jq -y
+
+      - name: checkout docker repository
+        uses: actions/checkout@v2
+
+      - name: Get Latest Release from nodebb repository
+        id: get_release
+        run: |
+          latest_release=$(curl -s https://api.github.com/repos/NodeBB/NodeBB/releases/latest | jq -r .tag_name)
+          echo "Latest release: $latest_release"
+          last_known_release="${{ vars.LAST_KNOWN_RELEASE }}"
+          echo "Last known release: $last_known_release"
+
+          if [ "$last_known_release" != "$latest_release" ]; then
+            echo "New release found: $latest_release"
+            gh variable set LAST_KNOWN_RELEASE --body "$latest_release"
+            # trigger another workflow
+            curl -X POST -H "Accept: application/vnd.github.v3+json" \
+               -H "Authorization: Bearer ${{ secrets.GITHUB_TOKEN }}" \
+               https://api.github.com/repos/${{ github.repository }}/dispatches \
+               -d '{"event_type": "custom-event", "client_payload": {"new_tag": "'"$latest_release"'"}}'
+          fi
+        env:
+          GH_TOKEN: ${{ secrets.GH_TOKEN }}

@@ -1,6 +1,7 @@
 #!/bin/bash
 
-GIT_TAG=$(echo $GITHUB_REF | sed 's/refs\/tags\///g')
+# GIT_TAG environment variable should be set, before calling this script
+# GIT_TAG=$(echo $GITHUB_REF | sed 's/refs\/tags\///g')
 
 # backup Docker file
 mkdir docker-repo

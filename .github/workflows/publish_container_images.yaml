@@ -1,14 +1,18 @@
 name: publish container images
 on:
-  push:
-    tags: ["v*"]
+  repository_dispatch:
+    types: [custom-event]
 
 jobs:
   setup:
     name: Setup
     runs-on: ubuntu-latest
 
-    steps:    
+    steps:
+      - name: Read new tag
+        run: |
+          echo "Received tag: ${{ github.event.client_payload.new_tag }}"
+ 
       - name: checkout docker repository
         uses: actions/checkout@v2
 
@@ -31,3 +35,5 @@ jobs:
 
       - name: Build container image and publish
         run: ./scripts/publish_container_images.sh
+        env:
+          GIT_TAG: "${{ github.event.client_payload.new_tag }}"
